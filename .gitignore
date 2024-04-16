@@ -1,2 +1,3 @@
 *.db
 /tutorials/blackboard/
+.DS_Store
