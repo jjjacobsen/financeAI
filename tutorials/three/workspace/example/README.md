@@ -1,3 +1,0 @@
-# Notes about former code in this directory
-
-The tutorial I was following asked us to run `git clone https://go.googlesource.com/example` in the above dir. This cloned an entire repository as a sub repo. If you want to keep everything, that is fine, just make sure to delete the .git folder in the sub repo. However, I didn't want to keep all the code in here because it's other peoples work. I deleted all the code from that repo, but left this note so if I need to rebuild the tutorial for whatever reason I can
