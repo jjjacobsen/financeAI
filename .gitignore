@@ -2,3 +2,6 @@
 /tutorials/blackboard/
 .DS_Store
 /pkg/loader/
+
+.python-version
+tutorials/
