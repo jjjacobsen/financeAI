@@ -60,3 +60,21 @@ Using AI to calculate a budget and give financial advice based on my current fin
     - like building 150 trees instead of 100, etc
 - I want to make sure that wherever I run this binary from, the data and models are always stored in the data directory in this repo
     - might need to create and use scripts/setup.sh for that
+
+### Python Packages ###
+
+For now I'm still using requirements.txt. I want to learn something new like pdm or poetry and do this in a better way. Here are the high level packages I installed so I can remember before I learn the new stuff
+
+- python-dotenv
+- gspread
+- google-auth
+
+### To setup manual.py ###
+
+Needed to do a few things
+- create new google cloud project
+- enable services
+    - sheets.googleapis.com
+    - drive.googleapis.com
+- create service account and download json key
+- from the sheet, share it with the service account email

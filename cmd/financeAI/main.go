@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-
-	"github.com/jjjacobsen/financeAI/pkg/loader"
+	// "github.com/jjjacobsen/financeAI/pkg/loader"
 )
 
 func main() {
-	loader.Test()
+	// loader.Test()
 	fmt.Println("Successfully pulled transactions")
 }

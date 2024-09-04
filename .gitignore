@@ -5,3 +5,7 @@
 
 .python-version
 tutorials/
+*.env
+google_key.json
+restricted.py
+__pycache__
