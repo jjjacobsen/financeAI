@@ -9,3 +9,5 @@ tutorials/
 google_key.json
 restricted.py
 __pycache__
+*.html
+*ledger_files/

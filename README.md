@@ -65,9 +65,11 @@ Using AI to calculate a budget and give financial advice based on my current fin
 
 For now I'm still using requirements.txt. I want to learn something new like pdm or poetry and do this in a better way. Here are the high level packages I installed so I can remember before I learn the new stuff
 
-- python-dotenv
 - gspread
 - google-auth
+- beautifulsoup4
+- pandas
+- ipython
 
 ### To setup manual.py ###
 
@@ -78,3 +80,5 @@ Needed to do a few things
     - drive.googleapis.com
 - create service account and download json key
 - from the sheet, share it with the service account email
+- login to bank and expand the transactions history to what you need, then download the html
+    - right click -> save page as -> Format: Web Page, Complete -> ledger.html
