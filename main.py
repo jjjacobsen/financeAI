@@ -72,9 +72,9 @@ def main():
                 values.append(["total expenses", round(total_expenses, 2)])
                 values.append(["net monthly", round(categories['11'][1] - total_expenses, 2)])
 
-                gsUpdater.update(values, "A3")
-                gsUpdater.update([["total number of transactions", total_transactions_count]], "A17")
-                gsUpdater.update([["checking", end_of_month_balance]], "A20")
+                gsUpdater.update(values, "A2")
+                gsUpdater.update([["total number of transactions", total_transactions_count]], "A16")
+                gsUpdater.update([["checking", end_of_month_balance]], "A19")
                 print("Pushed data to Google Sheets")
 
         elif choice == '3':
