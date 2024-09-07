@@ -30,7 +30,7 @@ def main():
                 '2': ['other monthly payments', 0],
                 '3': ['groceries', 0],
                 '4': ['food / whiskey / cigars', 0],
-                '5': ['gas', 0],
+                '5': ['gas / parking / transportation', 0],
                 '6': ['fun', 0],
                 '7': ['insurance', 0],
                 '8': ['vehicle payments', 0],
