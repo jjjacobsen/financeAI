@@ -1,13 +1,16 @@
-*.db
-/tutorials/blackboard/
-.DS_Store
-/pkg/loader/
+# Byte-compiled
+__pycache__/
 
+# macOS
+.DS_Store
+
+# PDM
+__pypackages__/
+.pdm-python
+
+# pyenv
 .python-version
+
+# project specific
 tutorials/
-*.env
-google_key.json
-restricted.py
-__pycache__
-*.html
-*ledger_files/
+restricted/
