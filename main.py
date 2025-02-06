@@ -1,13 +1,14 @@
 # flake8: noqa: E501
+import os
 from restricted.google import GoogleSheetUpdater
-from restricted.scrape import WebScraper
+from restricted.parse import DataParser
 
 
 def main():
     print("Welcome to financeAI!")
 
     gsUpdater = GoogleSheetUpdater()
-    webScraper = WebScraper()
+    dataParser = DataParser()
 
     while True:
         print("\nOptions:")
@@ -24,11 +25,8 @@ def main():
                 continue
 
             gsUpdater.set_worksheet(month)
-            df = webScraper.filter_by_month(month)
+            df = dataParser.filter_by_month(month)
             total_transactions_count = len(df)
-            end_of_month_balance = round(
-                float(df.iloc[0]["Account Balance"][1:].replace(",", "")), 2
-            )
             categories = {
                 "1": ["rent + utilities", 0],
                 "2": ["other monthly payments", 0],
@@ -42,7 +40,9 @@ def main():
                 "10": ["misc", 0],
                 "11": ["earned", 0],
             }
+            earned_key = "11"
             index = 0
+            skip_counter = 0
             print(f"Set worksheet to {month}")
 
             while index < total_transactions_count:
@@ -54,35 +54,44 @@ def main():
                     "\t".join(
                         [f"{key}) {value[0]}" for key, value in categories.items()]
                     )
-                    + "\tprint) show current values\n"
+                    + "\tprint) show current values"
+                    + "\tskip) skip this transaction"
+                    + "\tq) quit\n"
                 )
                 if sub_choice == "q":
                     break
                 elif sub_choice == "print":
                     print(categories)
                     continue
+                elif sub_choice == "skip":
+                    index += 1
+                    skip_counter += 1
+                    continue
                 elif sub_choice in categories:
-                    str_value = df.iloc[index]["Transaction Price"]
-                    if str_value[0] == "$":
-                        float_value = float(str_value[1:].replace(",", ""))
-                    else:
-                        float_value = float(str_value[2:].replace(",", ""))
+                    amount = float(abs(df.iloc[index]["Amount"]))
                     categories[sub_choice][1] = round(
-                        categories[sub_choice][1] + float_value, 2
+                        categories[sub_choice][1] + amount, 2
                     )
+                    df.loc[df.index[index], "Category"] = categories[sub_choice][0]
                     index += 1
                 else:
                     print("Invalid choice. Please try again")
                     continue
 
             if sub_choice != "q":
+                csv_file = "restricted/history.csv"
+                df.to_csv(
+                    csv_file, mode="a", header=not os.path.exists(csv_file), index=False
+                )
+                print(f"Wrote data to {csv_file}")
+
                 print(
                     f"\nTransaction {index}/{total_transactions_count} ({index / total_transactions_count * 100:.2f}%)"
                 )
                 print("Attempting to push data to Google Sheets...")
 
                 total_expenses = sum(
-                    value[1] for key, value in categories.items() if key != "11"
+                    value[1] for key, value in categories.items() if key != earned_key
                 )
 
                 values = [
@@ -90,14 +99,22 @@ def main():
                 ]
                 values.append(["total expenses", round(total_expenses, 2)])
                 values.append(
-                    ["net monthly", round(categories["11"][1] - total_expenses, 2)]
+                    [
+                        "net monthly",
+                        round(categories[earned_key][1] - total_expenses, 2),
+                    ]
                 )
 
                 gsUpdater.update(values, "A2")
                 gsUpdater.update(
-                    [["total number of transactions", total_transactions_count]], "A16"
+                    [
+                        [
+                            "total number of transactions",
+                            total_transactions_count - skip_counter,
+                        ]
+                    ],
+                    "A16",
                 )
-                gsUpdater.update([["checking", end_of_month_balance]], "A19")
                 print("Pushed data to Google Sheets")
 
         elif choice == "3":

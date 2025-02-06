@@ -33,7 +33,7 @@ Using AI to calculate a budget and give financial advice based on my current fin
     ```sh
     pip install pdm
     ```
-    - Current version is 2.19.1
+    - Current version is 2.22.3
 4. Install the rest of the packages
     ```sh
     pdm install --dev
@@ -59,8 +59,14 @@ Needed to do a few things
 
 ### To run ###
 
-- login to bank and expand the transactions history to get needed transactions, then download the html
-    - right click -> save page as -> Format: Web Page, Complete -> ledger.html
-        - this also downloads some directory with extra files, but ledger.html is the only one needed
-    - ledger.html needs to be under restricted/
+- login to bank
+    - select checking account
+        - click the download button next to "Transaction History"
+        - choose csv format
+        - name file debit.csv
+    - select credit card account
+        - go to the Search transactions tab
+        - at the bottom of the page select csv from "Transaction Format"
+        - name file credit.csv
+- make sure both csv files are under restricted/
 - `python main.py`
