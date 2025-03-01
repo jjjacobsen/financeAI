@@ -70,3 +70,4 @@ Needed to do a few things
         - name file credit.csv
 - make sure both csv files are under restricted/
 - `python main.py`
+- at the end backup the history csv
