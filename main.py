@@ -32,7 +32,7 @@ def main():
                 "2": ["other monthly payments", 0],
                 "3": ["groceries", 0],
                 "4": ["food / whiskey / cigars", 0],
-                "5": ["gas / parking / transportation", 0],
+                "5": ["fuel / parking / transportation", 0],
                 "6": ["fun", 0],
                 "7": ["insurance", 0],
                 "8": ["vehicle payments", 0],
@@ -54,8 +54,8 @@ def main():
                     "\t".join(
                         [f"{key}) {value[0]}" for key, value in categories.items()]
                     )
-                    + "\tprint) show current values"
-                    + "\tskip) skip this transaction"
+                    + "\tp) print current values"
+                    + "\ts) skip this transaction"
                     + "\tq) quit\n"
                 )
                 if sub_choice == "q":
