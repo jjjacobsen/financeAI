@@ -60,10 +60,10 @@ def main():
                 )
                 if sub_choice == "q":
                     break
-                elif sub_choice == "print":
+                elif sub_choice == "p":
                     print(categories)
                     continue
-                elif sub_choice == "skip":
+                elif sub_choice == "s":
                     index += 1
                     skip_counter += 1
                     continue
