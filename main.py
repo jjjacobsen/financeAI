@@ -33,7 +33,7 @@ def main():
                 "3": ["groceries", 0],
                 "4": ["food / whiskey / cigars", 0],
                 "5": ["fuel / parking / transportation", 0],
-                "6": ["fun", 0],
+                "6": ["fun / tithing / charity", 0],
                 "7": ["insurance", 0],
                 "8": ["vehicle payments", 0],
                 "9": ["student loans payments", 0],
