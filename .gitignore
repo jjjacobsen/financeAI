@@ -14,3 +14,4 @@ __pypackages__/
 # project specific
 tutorials/
 restricted/
+.venv/

@@ -1,73 +1,108 @@
-# financeAI #
-Using AI to calculate a budget and give financial advice based on my current financial state, primarily written in Go
+# financeAI
 
-- The main benefit is for when I calculate my net worth every month and I sort my transactions into categories like gas, groceries, drinks, etc
-    - Use AI to do the sorting
-- Can access my transaction history through apis, and make sure not to let any kind of passwords end up on the public repo
-- Can also access my loan information and other assets through apis
-- Have code put everything into the Google Sheet so I can see it easily
-    - maybe eventually I move data to a database and make a fancy UI. For now, Google Sheets is good enough
-- Once I collect all the data, use AI to calculate a budget and give financial advice
+**financeAI** is a tool that leverages AI to automate financial tracking, budgeting, and advice. It integrates with banking APIs to fetch transaction data, categorizes transactions, and provides insights into your financial health. The tool also supports exporting data to Google Sheets for easy visualization.
 
+---
 
-### Setup ###
+## Features ✨
 
-1. Install pyenv and pyenv-virtualenv ([brew](https://brew.sh/))
-   ```sh
-   brew update
-   brew upgrade
-   brew install pyenv
-   brew install pyenv-virtualenv
+- **Automated Transaction Categorization**: Uses AI to sort transactions into categories (e.g., gas, groceries, drinks).
+- **Multi-Account Support**: Fetches transaction history from checking and credit card accounts.
+- **Google Sheets Integration**: Exports categorized data to Google Sheets for easy tracking.
+- **Budgeting & Financial Advice**: Analyzes your financial data to suggest budgets and provide actionable advice.
+- **Secure API Integration**: Safely accesses banking and loan information without exposing sensitive credentials.
+
+---
+
+## Setup 🛠️
+
+### Prerequisites
+- [Homebrew](https://brew.sh/) (for macOS)
+- [pyenv](https://github.com/pyenv/pyenv) (for Python version management)
+- [PDM](https://pdm.fming.dev/) (for dependency management)
+
+### Installation
+1. Install system dependencies:
+   ```bash
+   brew install pyenv pipx
    ```
-2. Install python and create the venv
-   ```sh
-   pyenv install <python version>
-   pyenv virtualenv <python version> <venv name>
+
+2. Install Python and set up the project environment:
+   ```bash
+   pyenv install 3.12.6
+   pyenv local 3.12.6
+   pipx install pdm
    ```
-    - for automatic sourcing of the venv
-        ```sh
-        pyenv local <venv name>
-        ```
-    - Current version is 3.12.6
-3. Install pdm
-    ```sh
-    pip install pdm
-    ```
-    - Current version is 2.22.3
-4. Install the rest of the packages
-    ```sh
-    pdm install --dev
-    ```
-5. Setup pre-commit
-    ```sh
-    pre-commit install
-    ```
 
+3. Install project dependencies:
+   ```bash
+   pdm install
+   ```
 
-### To setup manual.py ###
+4. Set up pre-commit hooks (optional but recommended):
+   ```bash
+   pdm run pre-commit install
+   ```
 
-Needed to do a few things
-- create new google cloud project
-    - enable services
-        - sheets.googleapis.com
-        - drive.googleapis.com
-    - create service account and download json key
-- from the sheet ui, share it with the service account email
-- for restricted files that need a symbolic link:
-    - `ln -s ~/path/to/file restricted/file`
+### Google Sheets Configuration
+1. Create a new Google Cloud project and enable the following APIs:
+   - `sheets.googleapis.com`
+   - `drive.googleapis.com`
 
+2. Create a service account and download the JSON key file.
 
-### To run ###
+3. Share your Google Sheet with the service account email.
 
-- login to bank
-    - select checking account
-        - click the download button next to "Transaction History"
-        - choose csv format
-        - name file debit.csv
-    - select credit card account
-        - go to the Search transactions tab
-        - at the bottom of the page select csv from "Transaction Format"
-        - name file credit.csv
-- make sure both csv files are under restricted/
-- `python main.py`
-- at the end backup the history csv with script
+4. For restricted files (e.g., API keys), create symbolic links:
+   ```bash
+   ln -s ~/path/to/file restricted/file
+   ```
+
+---
+
+## Usage 🚀
+
+1. **Fetch Transaction Data**:
+   - **Checking Account**:
+     1. Log in to your bank account.
+     2. Navigate to the checking account's "Transaction History" section.
+     3. Click the download button and choose **CSV format**.
+     4. Save the file as `debit.csv` in the `restricted/` directory.
+   - **Credit Card Account**:
+     1. Log in to your credit card account.
+     2. Go to the "Search Transactions" tab.
+     3. At the bottom of the page, select **CSV** from the "Transaction Format" dropdown.
+     4. Save the file as `credit.csv` in the `restricted/` directory.
+
+2. **Run the Tool**:
+   ```bash
+   pdm run python main.py
+   ```
+   - The tool will:
+     - Fetch and categorize transactions using AI.
+     - Export the data to your configured Google Sheet.
+     - Provide budgeting insights and financial advice.
+
+3. **Backup**:
+   - After running the tool, back up the transaction history CSV files using the provided script:
+   ```bash
+   cd restricted
+   ./copy_history_to_icloud.sh
+   ```
+
+---
+
+## Contributing 🤝
+
+Contributions are welcome! If you'd like to improve financeAI, please:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Open a pull request.
+
+---
+
+## License 📜
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
