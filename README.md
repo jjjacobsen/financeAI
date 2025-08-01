@@ -106,3 +106,9 @@ Contributions are welcome! If you'd like to improve financeAI, please:
 ## License 📜
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+
+- changing how python and it's dependencies are managed
+   - going to use mise
+   - maybe going to use uv or poetry or something else
