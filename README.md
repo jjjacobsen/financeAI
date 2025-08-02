@@ -112,3 +112,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - changing how python and it's dependencies are managed
    - going to use mise
    - maybe going to use uv or poetry or something else
+- considering learning and using uv for everything else
